@@ -7,6 +7,8 @@ import json
 import os
 from itertools import product as P
 from tqdm import tqdm
+import sys
+sys.path.append(f"{sys.path[0]}/..")
 
 from src.substrate import Substrate
 from src.interaction import Interaction
@@ -58,12 +60,12 @@ def runSim(
 
     # load in pretrained parameters if any
     if parametersFile != None:
+        print("Loading pretrained") 
         with open(parametersFile, "r") as fitted_params:
             parameters = json.load(fitted_params)
         network.set_parameters(list(parameters.values()), list(parameters.keys()))
 
-    
-
+    # load in others 
     if params is not None:
       print("Applying parameters", params.keys())
       network.set_parameters(list(params.values()), list(params.keys()))
@@ -140,12 +142,6 @@ import sys
 #
 ##################################
 
-#
-# ROUTINE  
-#
-def doit(fileIn):
-  1
-
 
 #
 # Message printed when program run without arguments 
@@ -184,7 +180,11 @@ if __name__ == "__main__":
       #arg1=sys.argv[i+1] 
       #doit(arg1)
       path="input/input_atp_data/"
-      runSim(parametersFile="fitted_params/fitted_params.json")
+      runSim(
+             path=path,
+             parametersFile="fitted_params/fitted_params.json")
+      print("PASS") 
+      quit()
   
 
 
